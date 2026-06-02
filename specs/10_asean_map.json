@@ -1,0 +1,176 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/asean_latest.csv"
+  },
+  "width": 900,
+  "height": 430,
+  "projection": {
+    "type": "equirectangular",
+    "center": [
+      108,
+      8
+    ],
+    "scale": 700
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f3f8fc",
+        "stroke": "#d9e4ef",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "graticule": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#d9e4ef",
+        "strokeWidth": 0.6,
+        "opacity": 0.7
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.88,
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "depression",
+          "type": "quantitative",
+          "title": "Depression (%)",
+          "scale": {
+            "range": [
+              300,
+              1800
+            ]
+          }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Malaysia",
+              "Other ASEAN countries"
+            ],
+            "range": [
+              "#e08e79",
+              "#7c6bb0"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal"
+          },
+          {
+            "field": "depression",
+            "type": "quantitative",
+            "format": ".2f"
+          },
+          {
+            "field": "anxiety",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 18,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#52616b"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "country",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.country == \"Malaysia\""
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "fillOpacity": 0,
+        "stroke": "#e08e79",
+        "strokeWidth": 4,
+        "size": 2400
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    },
+    "title": {
+      "font": "Inter",
+      "fontWeight": 800,
+      "color": "#132238",
+      "anchor": "start"
+    }
+  }
+}

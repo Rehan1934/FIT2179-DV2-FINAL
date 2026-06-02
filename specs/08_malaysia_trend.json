@@ -1,0 +1,99 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/malaysia_trend.csv"
+  },
+  "width": 900,
+  "height": 340,
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {
+        "labelAngle": 0,
+        "values": [
+          1990,
+          1995,
+          2000,
+          2005,
+          2010,
+          2015,
+          2017
+        ]
+      }
+    },
+    "y": {
+      "field": "prevalence",
+      "type": "quantitative",
+      "title": "Estimated prevalence (%)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "color": {
+      "field": "condition",
+      "type": "nominal",
+      "title": "Condition",
+      "scale": {
+        "domain": [
+          "Depression",
+          "Anxiety"
+        ],
+        "range": [
+          "#7c6bb0",
+          "#4f8fc0"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal"
+      },
+      {
+        "field": "condition",
+        "type": "nominal"
+      },
+      {
+        "field": "prevalence",
+        "type": "quantitative",
+        "format": ".2f"
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    },
+    "title": {
+      "font": "Inter",
+      "fontWeight": 800,
+      "color": "#132238",
+      "anchor": "start"
+    }
+  }
+}

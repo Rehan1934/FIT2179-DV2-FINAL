@@ -1,0 +1,111 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/malaysia_disorder_profile.csv"
+  },
+  "width": 900,
+  "height": 330,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 7
+      },
+      "encoding": {
+        "y": {
+          "field": "condition",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null
+        },
+        "x": {
+          "field": "prevalence",
+          "type": "quantitative",
+          "title": "Estimated prevalence (%)"
+        },
+        "color": {
+          "field": "condition",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": null,
+            "range": [
+              "#4f8fc0",
+              "#7c6bb0",
+              "#e08e79",
+              "#65a891",
+              "#b7c4d0",
+              "#e5b567",
+              "#a98fc3"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "condition",
+            "type": "nominal"
+          },
+          {
+            "field": "prevalence",
+            "type": "quantitative",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 7,
+        "fontWeight": 800,
+        "color": "#132238"
+      },
+      "encoding": {
+        "y": {
+          "field": "condition",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "prevalence",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "prevalence",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    },
+    "title": {
+      "font": "Inter",
+      "fontWeight": 800,
+      "color": "#132238",
+      "anchor": "start"
+    }
+  }
+}

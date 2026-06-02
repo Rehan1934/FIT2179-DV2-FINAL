@@ -1,0 +1,7 @@
+gender,symptom,percentage,count,total
+Female,Anxiety,32.0,24,75
+Female,Depression,38.7,29,75
+Female,Panic attacks,33.3,25,75
+Male,Anxiety,38.5,10,26
+Male,Depression,23.1,6,26
+Male,Panic attacks,30.8,8,26

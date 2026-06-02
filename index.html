@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Malaysia’s Mental Health Crisis | FIT2179 DV2</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    .student-kpi-final {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .student-kpi-card {
+      border: 1px solid #dce7f1;
+      border-radius: 18px;
+      padding: 18px;
+      background: linear-gradient(135deg, #ffffff 0%, #f4f8fb 100%);
+      box-shadow: 0 10px 24px rgba(17, 32, 54, 0.06);
+      min-height: 155px;
+    }
+
+    .student-kpi-card span {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #112036;
+      margin-bottom: 8px;
+    }
+
+    .student-kpi-card strong {
+      display: block;
+      font-size: 2.25rem;
+      line-height: 1;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .student-kpi-card p {
+      font-size: 0.84rem;
+      color: #586879;
+      margin: 0 0 12px;
+    }
+
+    .student-kpi-card em {
+      display: inline-block;
+      font-style: normal;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #eef4fb;
+      color: #52616b;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .student-kpi-card.blue strong {
+      color: #4f8fc0;
+    }
+
+    .student-kpi-card.purple strong {
+      color: #7c6bb0;
+    }
+
+    .student-kpi-card.coral strong {
+      color: #e08e79;
+    }
+
+    .student-kpi-card.teal strong {
+      color: #65a891;
+    }
+
+    @media (max-width: 900px) {
+      .student-kpi-final {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="hero">
+      <p class="kicker">FIT2179 Data Visualisation 2 · Malaysia</p>
+      <h1>Malaysia’s Mental Health Crisis</h1>
+      <p class="subtitle">
+        How general population estimates, adolescent warning signs, and a university survey case study show why mental-health awareness needs to start earlier.
+      </p>
+
+      <div class="hero-grid">
+        <div>
+          <strong>Domain</strong>
+          <span>Mental-health awareness and public-health warning signs in Malaysia.</span>
+        </div>
+
+        <div>
+          <strong>Audience</strong>
+          <span>Average Malaysians, especially students, families, young adults and educators.</span>
+        </div>
+
+        <div>
+          <strong>Evidence layers</strong>
+          <span>ASEAN estimates, adolescent indicators, and a focused student survey case study.</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="intro-card">
+      <h2>Why this matters</h2>
+      <p>
+        Mental health is not visible through one number. It can appear through estimated population-level prevalence,
+        warning signs during adolescence, and reported symptoms among students. This visualisation combines these
+        evidence layers to explain why awareness and support should begin before distress becomes severe.
+      </p>
+
+      <p class="note">
+        <strong>Important:</strong> The student survey is used as a focused case study, not as a national estimate.
+        The charts show patterns and warning signs, not clinical diagnosis or proof of causation.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-number">Section 1</p>
+        <h2>Malaysia in wider mental-health context</h2>
+        <p>
+          Global prevalence estimates help position Malaysia beside neighbouring ASEAN countries. This gives the story
+          a broader public-health context instead of treating mental health as only a student issue.
+        </p>
+      </div>
+
+      <div class="chart-card">
+        <h3>Malaysia’s estimated depression and anxiety trend</h3>
+        <div id="vis-trend" class="chart"></div>
+        <div class="insight">
+          <strong>Insight:</strong> Anxiety remains consistently above depression in these estimates, while both remain visible across the period.
+          This supports treating mental health as an ongoing public-health concern rather than a short-term issue.
+        </div>
+        <p class="caption">
+          Source: Mental Health Depression Disorder dataset. Values are estimated prevalence percentages, not raw survey counts.
+        </p>
+      </div>
+
+      <div class="chart-grid two">
+        <div class="chart-card">
+          <h3>Latest ASEAN depression ranking</h3>
+          <div id="vis-ranking" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> Ranking gives a direct comparison of Malaysia against neighbouring countries without forcing readers to trace many lines.
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Malaysia’s mental-disorder profile</h3>
+          <div id="vis-profile" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> Different conditions appear at different levels, which is why a single mental-health number is not enough.
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3>ASEAN geographic view</h3>
+        <div id="vis-map" class="chart"></div>
+        <div class="insight">
+          <strong>Insight:</strong> The map places Malaysia geographically within ASEAN and helps readers see that the issue is regional rather than isolated.
+        </div>
+        <p class="caption">
+          Custom-built ASEAN choropleth-style map in Vega-Lite. Darker shading indicates higher estimated depression prevalence, and Malaysia is highlighted.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-number">Section 2</p>
+        <h2>Warning signs can appear before adulthood</h2>
+        <p>
+          Adolescent indicators show why mental-health awareness and support should begin before students enter university.
+        </p>
+      </div>
+
+      <div class="chart-grid two">
+        <div class="chart-card">
+          <h3>Malaysia adolescent warning-sign profile</h3>
+          <div id="vis-adolescent" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> Bullying, fighting, serious injury and social isolation sit beside self-harm indicators,
+            showing that wellbeing is social as well as individual.
+          </div>
+          <p class="caption">
+            Source: GHSH pooled adolescent dataset. Values are averages across available Malaysia sex and age groups.
+          </p>
+        </div>
+
+        <div class="chart-card">
+          <h3>Attempted-suicide indicator by age and sex</h3>
+          <div id="vis-suicide" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> Splitting by age and sex gives more detail while still requiring careful and sensitive interpretation.
+          </div>
+          <p class="caption">
+            Sensitive indicator shown as a warning sign, not as an explanation of causes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-number">Section 3</p>
+        <h2>A university survey case study</h2>
+        <p>
+          The university survey provides a focused student-level snapshot. It is not nationally representative,
+          but it shows how symptoms and help-seeking can appear in a student setting.
+        </p>
+      </div>
+
+      <div class="chart-card">
+        <h3>Student survey snapshot</h3>
+
+        <div id="vis-kpi" class="chart">
+          <div class="student-kpi-final">
+            <div class="student-kpi-card blue">
+              <span>Reported any symptom</span>
+              <strong>63.4%</strong>
+              <p>64 of 101 students reported at least one symptom.</p>
+              <em>Derived symptom burden</em>
+            </div>
+
+            <div class="student-kpi-card purple">
+              <span>Reported depression</span>
+              <strong>34.7%</strong>
+              <p>35 of 101 students reported depression.</p>
+              <em>Symptom indicator</em>
+            </div>
+
+            <div class="student-kpi-card purple">
+              <span>Reported anxiety</span>
+              <strong>33.7%</strong>
+              <p>34 of 101 students reported anxiety.</p>
+              <em>Symptom indicator</em>
+            </div>
+
+            <div class="student-kpi-card coral">
+              <span>Reported panic attacks</span>
+              <strong>32.7%</strong>
+              <p>33 of 101 students reported panic attacks.</p>
+              <em>Symptom indicator</em>
+            </div>
+
+            <div class="student-kpi-card coral">
+              <span>Reported two or more symptoms</span>
+              <strong>27.7%</strong>
+              <p>28 of 101 students reported overlapping symptoms.</p>
+              <em>Derived overlap indicator</em>
+            </div>
+
+            <div class="student-kpi-card teal">
+              <span>Sought specialist treatment</span>
+              <strong>5.9%</strong>
+              <p>Only 6 of 101 students reported specialist treatment-seeking.</p>
+              <em>Formal support indicator</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight">
+          <strong>Insight:</strong> Reported symptoms appear much more visible than specialist treatment-seeking in this survey.
+        </div>
+        <p class="caption">
+          Source: Student Mental Health dataset, Kaggle/IIUM student survey. Percentages are based on 101 respondents.
+        </p>
+      </div>
+
+      <div class="chart-grid two">
+        <div class="chart-card">
+          <h3>Which symptoms were reported most?</h3>
+          <div id="vis-symptoms" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> Depression, anxiety and panic attacks appear at similar levels,
+            so the case study is not limited to one symptom type.
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Symptoms overlap</h3>
+          <div id="vis-overlap" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> A stacked distribution shows that many respondents reported at least one symptom,
+            and some reported multiple symptoms together.
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3>The support gap</h3>
+        <div id="vis-gap" class="chart"></div>
+        <div class="insight">
+          <strong>Insight:</strong> The gap between reported symptoms and specialist treatment is one of the clearest reasons for awareness-building.
+        </div>
+        <p class="caption">
+          This does not judge students; it highlights a possible access, awareness, affordability or stigma gap.
+        </p>
+      </div>
+
+      <div class="chart-grid two">
+        <div class="chart-card">
+          <h3>Symptoms by gender</h3>
+          <div id="vis-gender" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> The heatmap supports comparison, but the small sample means this should not be overgeneralised.
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Symptoms by year of study</h3>
+          <div id="vis-year" class="chart"></div>
+          <div class="insight">
+            <strong>Insight:</strong> Year-of-study comparison suggests that support planning should consider different stages of university life.
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Reported symptoms across CGPA ranges</h3>
+        <div id="vis-cgpa" class="chart"></div>
+        <div class="insight">
+          <strong>Insight:</strong> This chart shows association only. It should not be interpreted as evidence that CGPA causes mental-health symptoms.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-number">Section 4</p>
+        <h2>Connecting the evidence</h2>
+        <p>
+          The final chart connects general, adolescent and student indicators without pretending they measure the same population.
+        </p>
+      </div>
+
+      <div class="chart-card">
+        <h3>Custom pressure profile: connecting the evidence</h3>
+        <div id="vis-pressure" class="chart"></div>
+        <div class="insight">
+          <strong>Insight:</strong> This custom profile is a communication summary, not a medical index.
+          It helps readers see how multiple evidence layers point toward the same awareness need.
+        </div>
+      </div>
+    </section>
+
+    <section class="takeaways">
+      <h2>What the data suggests</h2>
+
+      <div class="takeaway-grid">
+        <div>
+          <strong>Context matters.</strong>
+          <span>Malaysia’s pattern is clearer when compared with nearby countries.</span>
+        </div>
+
+        <div>
+          <strong>Warning signs start early.</strong>
+          <span>Adolescent indicators suggest support should begin before university.</span>
+        </div>
+
+        <div>
+          <strong>Symptoms can overlap.</strong>
+          <span>The student case study shows that symptoms can appear together.</span>
+        </div>
+
+        <div>
+          <strong>Help-seeking is lower.</strong>
+          <span>The survey highlights a gap between symptoms and specialist treatment.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="methodology">
+      <h2>Data sources, authorship & limitations</h2>
+
+      <div class="method-grid">
+        <div>
+          <h3>Global mental-health estimates</h3>
+          <p>Used for Malaysia and ASEAN comparisons of depression, anxiety and related indicators.</p>
+          <a href="https://www.kaggle.com/datasets/muhammadfaizan65/mental-health-depression-disorder-data" target="_blank" rel="noopener">
+            Kaggle: Mental Health Depression Disorder Data
+          </a>
+        </div>
+
+        <div>
+          <h3>Adolescent warning signs</h3>
+          <p>Used for youth indicators such as attempted suicide, bullying, social isolation and parental understanding.</p>
+          <a href="https://www.kaggle.com/datasets/kashishnaqvi/suicidal-behaviours-among-adolescents" target="_blank" rel="noopener">
+            Kaggle: Suicidal Behaviours Among Adolescents / GHSH
+          </a>
+        </div>
+
+        <div>
+          <h3>University survey case study</h3>
+          <p>Used for reported depression, anxiety, panic attacks, CGPA, year of study and treatment-seeking.</p>
+          <a href="https://www.kaggle.com/datasets/shariful07/student-mental-health/data" target="_blank" rel="noopener">
+            Kaggle: Student Mental Health Dataset
+          </a>
+        </div>
+
+        <div>
+          <h3>Limitations</h3>
+          <p>
+            The student survey is small and not nationally representative. Global values may be modelled estimates.
+            The charts show patterns and warning signs, not clinical diagnosis or causation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        <strong>Author:</strong> Abdullah Rehan ·
+        <strong>Student ID:</strong> 34445390 ·
+        <strong>Unit:</strong> FIT2179 Data Visualisation 2 ·
+        <strong>Date:</strong> 31 May 2026
+      </p>
+
+      <p>
+        <strong>AI acknowledgement:</strong> Generative AI tools were used to assist with planning, wording,
+        code debugging and layout refinement. All data selection, interpretation, visualisation decisions
+        and final submission were reviewed and edited by the author.
+      </p>
+    </footer>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

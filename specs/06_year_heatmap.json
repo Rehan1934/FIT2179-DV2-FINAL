@@ -1,0 +1,125 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/year_symptoms.csv"
+  },
+  "width": 520,
+  "height": 250,
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 6
+      },
+      "encoding": {
+        "x": {
+          "field": "symptom",
+          "type": "nominal",
+          "title": null
+        },
+        "y": {
+          "field": "year_of_study",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Year 1",
+            "Year 2",
+            "Year 3",
+            "Year 4"
+          ]
+        },
+        "color": {
+          "field": "percentage",
+          "type": "quantitative",
+          "title": "%",
+          "scale": {
+            "scheme": "purples",
+            "domain": [
+              0,
+              80
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year_of_study",
+            "type": "nominal"
+          },
+          {
+            "field": "symptom",
+            "type": "nominal"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontWeight": 800
+      },
+      "encoding": {
+        "x": {
+          "field": "symptom",
+          "type": "nominal"
+        },
+        "y": {
+          "field": "year_of_study",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Year 1",
+            "Year 2",
+            "Year 3",
+            "Year 4"
+          ]
+        },
+        "text": {
+          "field": "percentage",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.percentage > 45",
+            "value": "white"
+          },
+          "value": "#132238"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    },
+    "title": {
+      "font": "Inter",
+      "fontWeight": 800,
+      "color": "#132238",
+      "anchor": "start"
+    }
+  }
+}

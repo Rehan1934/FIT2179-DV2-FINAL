@@ -1,0 +1,13 @@
+year_of_study,year_order,symptom,percentage,count,total
+Year 1,1,Anxiety,32.6,14,43
+Year 1,1,Depression,32.6,14,43
+Year 1,1,Panic attacks,32.6,14,43
+Year 2,2,Anxiety,38.5,10,26
+Year 2,2,Depression,38.5,10,26
+Year 2,2,Panic attacks,30.8,8,26
+Year 3,3,Anxiety,33.3,8,24
+Year 3,3,Depression,41.7,10,24
+Year 3,3,Panic attacks,41.7,10,24
+Year 4,4,Anxiety,25.0,2,8
+Year 4,4,Depression,12.5,1,8
+Year 4,4,Panic attacks,12.5,1,8

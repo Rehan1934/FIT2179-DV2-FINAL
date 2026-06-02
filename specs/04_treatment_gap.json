@@ -1,0 +1,90 @@
+@'
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Treatment gap chart comparing symptoms and specialist help-seeking.",
+  "data": {
+    "url": "data/processed/treatment_gap.csv"
+  },
+  "width": 900,
+  "height": 260,
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 8
+  },
+  "encoding": {
+    "y": {
+      "field": "category",
+      "type": "nominal",
+      "sort": [
+        "Reported at least one symptom",
+        "Symptomatic but no specialist treatment",
+        "Sought specialist treatment"
+      ],
+      "title": null
+    },
+    "x": {
+      "field": "percentage",
+      "type": "quantitative",
+      "title": "Student respondents (%)",
+      "scale": {
+        "domain": [0, 70]
+      }
+    },
+    "color": {
+      "field": "type",
+      "type": "nominal",
+      "title": "Indicator type",
+      "scale": {
+        "domain": ["Symptom", "Gap", "Support"],
+        "range": ["#4f8fc0", "#e08e79", "#65a891"]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "category",
+        "type": "nominal",
+        "title": "Category"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Respondents (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Count"
+      },
+      {
+        "field": "total",
+        "type": "quantitative",
+        "title": "Total"
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    }
+  }
+}
+'@ | Set-Content -Encoding UTF8 specs/04_treatment_gap.json

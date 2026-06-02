@@ -1,0 +1,7 @@
+metric,percentage,count,total,type
+Any reported symptom,63.4,64,101,Symptoms
+Anxiety,33.7,34,101,Symptoms
+Depression,34.7,35,101,Symptoms
+Panic attacks,32.7,33,101,Symptoms
+Multiple symptoms,27.7,28,101,Overlap
+Specialist treatment,5.9,6,101,Support

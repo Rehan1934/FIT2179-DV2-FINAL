@@ -1,0 +1,102 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/symptom_overlap.csv"
+  },
+  "width": 520,
+  "height": 170,
+  "mark": {
+    "type": "bar",
+    "cornerRadius": 9
+  },
+  "encoding": {
+    "y": {
+      "value": 75
+    },
+    "x": {
+      "aggregate": "sum",
+      "field": "percentage",
+      "type": "quantitative",
+      "title": "Share of student respondents (%)",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      }
+    },
+    "color": {
+      "field": "label",
+      "type": "nominal",
+      "title": "Reported symptoms",
+      "sort": [
+        "No reported symptoms",
+        "One symptom",
+        "Two symptoms",
+        "All three symptoms"
+      ],
+      "scale": {
+        "domain": [
+          "No reported symptoms",
+          "One symptom",
+          "Two symptoms",
+          "All three symptoms"
+        ],
+        "range": [
+          "#d9e4ef",
+          "#7fb3c8",
+          "#7c6bb0",
+          "#e08e79"
+        ]
+      }
+    },
+    "order": {
+      "field": "symptom_count",
+      "type": "quantitative"
+    },
+    "tooltip": [
+      {
+        "field": "label",
+        "type": "nominal"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "format": ".1f"
+      },
+      {
+        "field": "count",
+        "type": "quantitative"
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    },
+    "title": {
+      "font": "Inter",
+      "fontWeight": 800,
+      "color": "#132238",
+      "anchor": "start"
+    }
+  }
+}

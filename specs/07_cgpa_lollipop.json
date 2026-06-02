@@ -1,0 +1,77 @@
+@'
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Reported symptoms across CGPA ranges.",
+  "data": {
+    "url": "data/processed/cgpa_symptoms.csv"
+  },
+  "width": 900,
+  "height": 280,
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 8,
+    "color": "#7c6bb0"
+  },
+  "encoding": {
+    "y": {
+      "field": "cgpa",
+      "type": "ordinal",
+      "sort": [
+        "0 - 1.99",
+        "2.00 - 2.49",
+        "2.50 - 2.99",
+        "3.00 - 3.49",
+        "3.50 - 4.00"
+      ],
+      "title": "CGPA range"
+    },
+    "x": {
+      "field": "percentage",
+      "type": "quantitative",
+      "title": "Students with at least one reported symptom (%)",
+      "scale": {
+        "domain": [0, 100]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "cgpa",
+        "type": "nominal",
+        "title": "CGPA range"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Students (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Count"
+      },
+      {
+        "field": "total",
+        "type": "quantitative",
+        "title": "Total"
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    }
+  }
+}
+'@ | Set-Content -Encoding UTF8 specs/07_cgpa_lollipop.json

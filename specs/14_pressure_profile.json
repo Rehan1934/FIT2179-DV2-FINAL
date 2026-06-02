@@ -1,0 +1,88 @@
+@'
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Custom pressure profile connecting evidence layers.",
+  "data": {
+    "url": "data/processed/pressure_profile.csv"
+  },
+  "width": 900,
+  "height": 380,
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 8
+  },
+  "encoding": {
+    "y": {
+      "field": "indicator",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null,
+      "axis": {
+        "labelLimit": 280
+      }
+    },
+    "x": {
+      "field": "percentage",
+      "type": "quantitative",
+      "title": "Indicator value (%)",
+      "scale": {
+        "domain": [0, 100]
+      }
+    },
+    "color": {
+      "field": "evidence_layer",
+      "type": "nominal",
+      "title": "Evidence layer",
+      "scale": {
+        "range": ["#4f8fc0", "#e08e79", "#7c6bb0", "#65a891"]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "evidence_layer",
+        "type": "nominal",
+        "title": "Evidence layer"
+      },
+      {
+        "field": "indicator",
+        "type": "nominal",
+        "title": "Indicator"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Value (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "interpretation",
+        "type": "nominal",
+        "title": "Interpretation"
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    }
+  }
+}
+'@ | Set-Content -Encoding UTF8 specs/14_pressure_profile.json

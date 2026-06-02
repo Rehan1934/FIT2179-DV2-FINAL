@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/gender_symptoms.csv"
+  },
+  "width": 520,
+  "height": 250,
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 6
+      },
+      "encoding": {
+        "x": {
+          "field": "symptom",
+          "type": "nominal",
+          "title": null
+        },
+        "y": {
+          "field": "gender",
+          "type": "nominal",
+          "title": null
+        },
+        "color": {
+          "field": "percentage",
+          "type": "quantitative",
+          "title": "%",
+          "scale": {
+            "scheme": "blues",
+            "domain": [
+              0,
+              65
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "gender",
+            "type": "nominal"
+          },
+          {
+            "field": "symptom",
+            "type": "nominal"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontWeight": 800
+      },
+      "encoding": {
+        "x": {
+          "field": "symptom",
+          "type": "nominal"
+        },
+        "y": {
+          "field": "gender",
+          "type": "nominal",
+          "title": null
+        },
+        "text": {
+          "field": "percentage",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.percentage > 45",
+            "value": "white"
+          },
+          "value": "#132238"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    },
+    "title": {
+      "font": "Inter",
+      "fontWeight": 800,
+      "color": "#132238",
+      "anchor": "start"
+    }
+  }
+}

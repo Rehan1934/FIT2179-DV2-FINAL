@@ -1,0 +1,111 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/student_summary.csv"
+  },
+  "width": 900,
+  "height": 300,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 7
+      },
+      "encoding": {
+        "y": {
+          "field": "metric",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null
+        },
+        "x": {
+          "field": "percentage",
+          "type": "quantitative",
+          "title": "Student respondents (%)"
+        },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Symptoms",
+              "Overlap",
+              "Support"
+            ],
+            "range": [
+              "#7c6bb0",
+              "#4f8fc0",
+              "#65a891"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "metric",
+            "type": "nominal"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 7,
+        "fontWeight": 800,
+        "color": "#132238"
+      },
+      "encoding": {
+        "y": {
+          "field": "metric",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "percentage",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "percentage",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "gridColor": "#e8eef5",
+      "domainColor": "#d6e0ea",
+      "tickColor": "#d6e0ea"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter",
+      "labelColor": "#52616b",
+      "titleColor": "#132238",
+      "orient": "bottom"
+    },
+    "title": {
+      "font": "Inter",
+      "fontWeight": 800,
+      "color": "#132238",
+      "anchor": "start"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+category,percentage,count,total,type
+Reported at least one symptom,63.4,64,101,Symptom
+Symptomatic but no specialist treatment,57.4,58,101,Gap
+Sought specialist treatment,5.9,6,101,Support
