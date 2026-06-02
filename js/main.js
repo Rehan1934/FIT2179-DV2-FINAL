@@ -820,6 +820,7 @@ function pressureProfileSpec() {
 
 // ============================================================
 // Render all charts once
+// Fixed version: keeps the student KPI snapshot alive permanently.
 // ============================================================
 
 const externalCharts = [
@@ -843,6 +844,10 @@ const inlineCharts = [
 async function embedTo(selector, specOrUrl) {
   const element = document.querySelector(selector);
   if (!element) return;
+
+  // IMPORTANT:
+  // Never clear the student KPI snapshot. It is HTML cards, not Vega.
+  if (selector === "#vis-kpi") return;
 
   element.innerHTML = "";
 
@@ -875,6 +880,7 @@ async function renderMap() {
   } catch (error) {
     console.warn("Choropleth failed, using coordinate fallback.", error);
     element.innerHTML = "";
+
     await vegaEmbed("#vis-map", aseanCoordinateFallbackSpec(), {
       actions: false,
       renderer: "svg"
@@ -882,20 +888,84 @@ async function renderMap() {
   }
 }
 
+// This is the important fix.
+// It force-restores the student snapshot if anything clears it.
+function forceStudentSnapshotCards() {
+  const element = document.querySelector("#vis-kpi");
+  if (!element) return;
+
+  element.style.minHeight = "0";
+  element.style.height = "auto";
+  element.style.display = "block";
+
+  element.innerHTML = `
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
+      margin:8px 0 4px;
+      width:100%;
+    ">
+      ${kpiCard("Reported any symptom", "63.4%", "64 of 101 students reported at least one symptom.", "Derived symptom burden", "#4f8fc0")}
+      ${kpiCard("Reported depression", "34.7%", "35 of 101 students reported depression.", "Symptom indicator", "#7c6bb0")}
+      ${kpiCard("Reported anxiety", "33.7%", "34 of 101 students reported anxiety.", "Symptom indicator", "#7c6bb0")}
+      ${kpiCard("Reported panic attacks", "32.7%", "33 of 101 students reported panic attacks.", "Symptom indicator", "#e08e79")}
+      ${kpiCard("Reported two or more symptoms", "27.7%", "28 of 101 students reported overlapping symptoms.", "Derived overlap indicator", "#e08e79")}
+      ${kpiCard("Sought specialist treatment", "5.9%", "Only 6 of 101 students reported specialist treatment-seeking.", "Formal support indicator", "#65a891")}
+    </div>
+  `;
+}
+
+// Keeps watching the KPI area.
+// If another script or async render clears it, this immediately puts the cards back.
+function protectStudentSnapshotCards() {
+  const element = document.querySelector("#vis-kpi");
+  if (!element) return;
+
+  forceStudentSnapshotCards();
+
+  const observer = new MutationObserver(() => {
+    const hasCards = element.textContent.includes("Reported any symptom");
+
+    if (!hasCards) {
+      forceStudentSnapshotCards();
+    }
+  });
+
+  observer.observe(element, {
+    childList: true,
+    subtree: true
+  });
+
+  // Extra backup restores for browser/cache timing issues.
+  setTimeout(forceStudentSnapshotCards, 100);
+  setTimeout(forceStudentSnapshotCards, 500);
+  setTimeout(forceStudentSnapshotCards, 1000);
+  setTimeout(forceStudentSnapshotCards, 2000);
+  setTimeout(forceStudentSnapshotCards, 4000);
+}
+
 function runDashboard() {
-  renderStudentSnapshotCards();
+  // Render the student cards first.
+  protectStudentSnapshotCards();
+
+  // Render the map.
   renderMap();
 
+  // Render external Vega-Lite specs.
   externalCharts.forEach(([selector, url]) => {
     embedTo(selector, `${url}?v=${Date.now()}`);
   });
 
+  // Render inline Vega-Lite specs.
   inlineCharts.forEach(([selector, spec]) => {
     embedTo(selector, spec);
   });
 
-  // Extra safety: render KPI cards again after other async charts start.
-  setTimeout(renderStudentSnapshotCards, 500);
+  // Final safety pass after all chart rendering begins.
+  setTimeout(forceStudentSnapshotCards, 800);
+  setTimeout(forceStudentSnapshotCards, 1600);
+  setTimeout(forceStudentSnapshotCards, 3000);
 }
 
 if (document.readyState === "loading") {
